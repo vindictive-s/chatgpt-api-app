@@ -1,6 +1,6 @@
+import { usePostAiTextMutation } from "@/state/api";
 import React, { useState } from "react";
 import MessageFormUI from "./MessageFormUI";
-import { usePostAiTextMutation } from "@/state/api";
 
 const Ai = ({ props, activeChat }) => {
   const [message, setMessage] = useState("");
@@ -22,6 +22,7 @@ const Ai = ({ props, activeChat }) => {
       text: message,
       activeChatId: activeChat.id,
     };
+
     props.onSubmit(form);
     trigger(form);
     setMessage("");

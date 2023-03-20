@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import {
-  XMarkIcon,
-  PaperClipIcon,
   PaperAirplaneIcon,
+  PaperClipIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/solid";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 
 const MessageFormUI = ({
@@ -11,6 +11,8 @@ const MessageFormUI = ({
   message,
   handleChange,
   handleSubmit,
+  appendText,
+  handleKeyDown,
 }) => {
   const [preview, setPreview] = useState("");
 
@@ -40,14 +42,23 @@ const MessageFormUI = ({
             type="text"
             value={message}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             placeholder="Send a message..."
           />
+          {appendText && (
+            <input
+              className="message-form-assist"
+              type="text"
+              disabled="disabled"
+              value={`${message} ${appendText}`}
+            />
+          )}
         </div>
         <div className="message-form-icons">
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
-            noCLick={true}
+            noClick={true}
             onDrop={(acceptedFiles) => {
               setAttachment(acceptedFiles[0]);
               setPreview(URL.createObjectURL(acceptedFiles[0]));
